@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- vue模板 -->
+    <div id="app"></div>
+
+    <script src="./vue.min.js"></script>
+
+    <script>
+      // 创建一个vue实例
+      var vm = new Vue({
+        data: {
+          title: "Hello World",
+          author: "袁",
+        },
+        template: `<div>
+          <h1>第一个vue应用：{{title}}</h1>
+          <p>作者：{{author}}</p>
+        </div>`,
+        // render(h) {
+        //   console.log("render");
+        //   return h("div", [
+        //     h("h1", `第一个vue应用：${this.title}`),
+        //     h("p", `作者：${this.author}`),
+        //   ]);
+        // },
+      });
+    </script>
+  </body>
+</html>

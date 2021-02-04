@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <img :src="image" alt="" />
+    </div>
+
+    <script src="./vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        data: {
+          image:
+            "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2342083191,4139347491&fm=26&gp=0.jpg",
+        },
+      });
+      vm.$mount("#app");
+    </script>
+  </body>
+</html>

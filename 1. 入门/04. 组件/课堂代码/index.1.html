@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./vue.min.js"></script>
+    <script>
+      var MyButton = {
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        template: `<button @click="count++">当前点击了{{count}}次</button>`,
+      };
+      // 全局注册了一个组件
+      // Vue.component("MyButton", MyButton);
+      var Title = {
+        props: ["biaoti1", "biaoti2"],
+        template: `<div><h1>{{biaoti1}}</h1><h2>{{biaoti2}}</h2>
+        <button>change</button>
+        </div>`,
+      };
+      var vm = new Vue({
+        components: {
+          // 局部注册组件
+          MyButton,
+          Title,
+        },
+        template: `<div>
+          <MyButton></MyButton>
+          <Title biaoti1="标题1" biaoti2="标题1-1" /> <!-- 显示 标题1 -->
+          <Title biaoti1="标题2"  biaoti2="标题2-1"/> <!-- 显示 标题2 -->
+          <Title biaoti1="标题3"  biaoti2="标题3-1"/> <!-- 显示 标题3 -->
+        </div>`,
+      });
+
+      vm.$mount("#app");
+    </script>
+  </body>
+</html>

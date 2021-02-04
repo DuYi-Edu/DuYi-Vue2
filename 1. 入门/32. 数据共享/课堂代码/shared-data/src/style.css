@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.block{
+  width: 200px;
+  height: 200px;
+  margin: 25px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+button{
+  margin: 0 5px;
+}

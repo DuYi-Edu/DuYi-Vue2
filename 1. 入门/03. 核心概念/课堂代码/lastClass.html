@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- vue模板 -->
+    <div id="app">
+      <h1>系统名称：{{title}}</h1>
+      <ul>
+        <li v-for="(item, i) in products" :key="item.id">
+          {{item.name}}
+          <button @click="changeStock(item, item.stock-1)">-</button>
+          <span>{{item.stock > 0 ? item.stock : "无货"}}</span>
+          <button @click="item.stock++">+</button>
+          <button @click="deleteProduct(i)">删除</button>
+        </li>
+      </ul>
+      <p>总库存：{{totalStock}}</p>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        // 配置对象
+        el: "#app",
+        data: {
+          title: "库存管理系统",
+          products: [
+            { id: 1, name: "iphone", stock: 0 },
+            { id: 2, name: "xiaomi", stock: 6 },
+            { id: 3, name: "huawei", stock: 7 },
+          ],
+        },
+        computed: {
+          totalStock() {
+            return this.products.reduce((a, b) => a + b.stock, 0);
+          },
+        },
+        methods: {
+          deleteProduct(i) {
+            this.products.splice(i, 1);
+          },
+          changeStock(p, newStock) {
+            if (newStock < 0) {
+              newStock = 0;
+            }
+            p.stock = newStock;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
