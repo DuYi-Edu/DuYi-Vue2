@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1 id="title">{{a}}, {{b}}, {{c}}, {{d}}</h1>
+      <button @click="handleChange">change all</button>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+          };
+        },
+        methods: {
+          handleChange() {
+            this.a = 10;
+
+            this.$nextTick(() => {
+              var app = document.getElementById("title");
+              console.log(app.innerText);
+            });
+
+            this.b = 11;
+            this.c = 12;
+            this.d = 13;
+          },
+        },
+        render(h) {
+          console.log("render");
+          return h("div", [
+            h(
+              "h1",
+              { attrs: { id: "title" } },
+              `${this.a},${this.b},${this.c},${this.d}`
+            ),
+            h(
+              "button",
+              {
+                on: {
+                  click: this.handleChange,
+                },
+              },
+              "change all"
+            ),
+          ]);
+        },
+      });
+    </script>
+  </body>
+</html>

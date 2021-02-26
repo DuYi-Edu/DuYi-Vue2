@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}}</h1>
+      <h2>{{obj.a}}</h2>
+      <button @click="count++">increase</button>
+      <button @click="$set(obj, 'b', 1)">new Prop</button>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            count: 0,
+            msg: "Hello Vue",
+            obj: {},
+          };
+        },
+        render(h) {
+          console.log("render");
+          return h("div", [
+            h("h1", this.msg),
+            h("h2", this.obj.a),
+            h(
+              "button",
+              {
+                on: {
+                  click: () => {
+                    this.count++;
+                  },
+                },
+              },
+              "increase"
+            ),
+            h(
+              "button",
+              {
+                on: {
+                  click: () => {
+                    this.$set(this.obj, "b", 1);
+                  },
+                },
+              },
+              "button2"
+            ),
+          ]);
+        },
+      });
+    </script>
+  </body>
+</html>
