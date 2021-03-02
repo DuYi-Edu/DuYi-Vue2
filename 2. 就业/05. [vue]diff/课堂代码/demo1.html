@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="n in numbers" :key="n">{{n}}</li>
+      </ul>
+      <button @click="numbers.reverse()">翻转数组</button>
+      <button @click="numbers.unshift(100)">头部插入</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          numbers: [1, 2, 3, 4, 5],
+        },
+      });
+    </script>
+  </body>
+</html>

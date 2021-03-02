@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" style="width: 500px; margin: 0 auto; line-height: 3">
+      <div>
+        <a href="" @click.prevent="accoutLogin=true">账号登录</a>
+        <span>|</span>
+        <a href="" @click.prevent="accoutLogin=false">手机号登录</a>
+      </div>
+      <div v-if="accoutLogin" key="1">
+        <label>账号</label>
+        <input type="text" />
+      </div>
+      <div v-else key="2">
+        <label>手机号</label>
+        <input type="text" />
+      </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          accoutLogin: true,
+        },
+      });
+    </script>
+  </body>
+</html>
