@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>title 1</li>
+      <li>title 2</li>
+    </ul>
+    <button>交换</button>
+
+    <script>
+      var btn = document.querySelector("button");
+
+      // 当浏览器下一次渲染之后，调用回调
+      function raf(callback) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(callback);
+        });
+      }
+
+      function getY(dom) {
+        return dom.getBoundingClientRect().top;
+      }
+
+      function applyTransition(dom, initY) {
+        var curY = getY(dom); //记录变化后的位置
+        var dis = initY - curY; //计算位置的差值
+        dom.style.transform = `translateY(${dis}px)`;
+        // 渲染之后
+        raf(() => {
+          dom.style.transition = ".5s";
+          dom.style.transform = "none";
+          dom.addEventListener(
+            "transitionend",
+            () => {
+              dom.style.transition = "none";
+            },
+            {
+              once: true,
+            }
+          );
+        });
+      }
+
+      btn.onclick = function () {
+        var ul = document.querySelector("ul");
+        var li1 = document.querySelector("ul li:nth-child(1)");
+        var li1Y = getY(li1); // 拿到li1的初始位置
+        var li2 = document.querySelector("ul li:nth-child(2)");
+        var li2Y = getY(li2); // 拿到li2的初始位置
+        ul.insertBefore(li2, li1); // 没有任何过渡效果的变化
+
+        applyTransition(li1, li1Y);
+        applyTransition(li2, li2Y);
+      };
+    </script>
+  </body>
+</html>
