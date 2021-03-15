@@ -2,51 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <!-- vue模板 -->
+    <!-- 模板 -> vue -> 真实的dom -->
     <div id="app">
-      <h1>系统名称：{{title}}</h1>
+      <h1>标题：商品管理系统</h1>
       <ul>
         <li v-for="(item, i) in products">
-          {{item.name}}
-          <button @click="changeStock(item, item.stock-1)">-</button>
-          <span>{{item.stock > 0 ? item.stock : "无货"}}</span>
-          <button @click="item.stock++">+</button>
-          <button @click="deleteProduct(i)">删除</button>
+          商品名称：{{item.name}}，商品库存:
+          <button @click="changeStock(item, item.stock - 1)">-</button>
+          {{item.stock?item.stock:'无货'}}
+          <button @click="changeStock(item, item.stock + 1)">+</button>
+
+          <button @click="remove(i)">删除</button>
         </li>
       </ul>
-      <p>总库存：{{totalStock}}</p>
+      <p>总库存: {{total}}</p>
     </div>
     <script src="./vue.min.js"></script>
     <script>
       var vm = new Vue({
-        // 配置对象
         el: "#app",
         data: {
-          title: "库存管理系统",
+          // 页面中要使用的数据
           products: [
-            { name: "iphone", stock: 0 },
-            { name: "xiaomi", stock: 6 },
-            { name: "huawei", stock: 7 },
+            { name: "iphone", stock: 10 },
+            { name: "xiaomi", stock: 9 },
+            { name: "huawei", stock: 8 },
           ],
         },
         computed: {
-          totalStock() {
+          total() {
             return this.products.reduce((a, b) => a + b.stock, 0);
           },
         },
         methods: {
-          deleteProduct(i) {
-            this.products.splice(i, 1);
-          },
-          changeStock(p, newStock) {
+          changeStock(product, newStock) {
             if (newStock < 0) {
               newStock = 0;
             }
-            p.stock = newStock;
+            product.stock = newStock; // 数据变化
+          },
+
+          remove(index) {
+            this.products.splice(index, 1);
           },
         },
       });
