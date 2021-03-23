@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+    <div id="app">
+      <style>
+        .loading-img {
+          position: fixed;
+          width: 200px;
+          height: 200px;
+          left: 50%;
+          top: 50%;
+          margin-left: -100px;
+          margin-top: -100px;
+        }
+      </style>
+      <img class="loading-img" src="./img/loading.gif" alt="" />
+    </div>
+    <!-- ref cdn -->
+    <% if(NODE_ENV === "production") { %>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.7/vue-router.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    <% } %>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
